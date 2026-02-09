@@ -22,7 +22,6 @@ export type Section = HeroSection | CtaSection;
 export type SiteResponse = {
   slug: string;
   updated: string;
-  published?: boolean;
   content?: {
     sections?: Section[];
   };
