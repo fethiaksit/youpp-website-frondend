@@ -1,7 +1,6 @@
 import SectionRenderer from "@/components/SectionRenderer";
+import { getBackendBaseUrl } from "@/lib/backend";
 import type { SiteResponse } from "@/lib/types";
-
-const baseUrl = process.env.BACKEND_BASE_URL;
 
 function NotFoundState() {
   return (
@@ -11,34 +10,40 @@ function NotFoundState() {
       </p>
       <h1 className="text-3xl font-semibold text-white">Site not found</h1>
       <p className="text-base text-slate-300">
-        The site you are looking for does not exist or is not published yet.
+        The site you are looking for does not exist.
       </p>
     </main>
   );
 }
 
 async function getSite(slug: string): Promise<SiteResponse | null> {
-  if (!baseUrl) {
-    throw new Error("BACKEND_BASE_URL is not configured.");
-  }
+  const baseUrl = getBackendBaseUrl();
 
-  const response = await fetch(`${baseUrl}/s/${slug}`, { cache: "no-store" });
+  const response = await fetch(
+    `${baseUrl}/s/${encodeURIComponent(slug)}`,
+    { cache: "no-store" }
+  );
 
   if (!response.ok) {
     return null;
   }
 
-  return (await response.json()) as SiteResponse;
+  try {
+    return (await response.json()) as SiteResponse;
+  } catch {
+    return null;
+  }
 }
 
 export default async function SitePage({
   params
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
-  const data = await getSite(params.slug);
+  const { slug } = await params;
+  const data = await getSite(slug);
 
-  if (!data || data.published === false) {
+  if (!data) {
     return <NotFoundState />;
   }
 
