@@ -41,22 +41,20 @@ export default function AdminLoginPage() {
 
   return (
     <main className="mx-auto flex min-h-screen max-w-lg flex-col justify-center px-6 py-16">
-      <div className="rounded-3xl border border-white/10 bg-slate-900/50 p-8 shadow-2xl shadow-black/40">
+      <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-xl shadow-slate-900/10">
         <div className="space-y-2">
-          <p className="text-xs uppercase tracking-[0.3em] text-slate-400">
-            Admin
-          </p>
-          <h1 className="text-3xl font-semibold text-white">Sign in</h1>
-          <p className="text-sm text-slate-300">
+          <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Admin</p>
+          <h1 className="text-3xl font-semibold text-slate-900">Sign in</h1>
+          <p className="text-sm text-slate-600">
             Use your credentials to manage your website.
           </p>
         </div>
 
         <form className="mt-8 space-y-5" onSubmit={onSubmit}>
-          <label className="block text-sm text-slate-200">
+          <label className="block text-sm text-slate-700">
             Email
             <input
-              className="mt-2 w-full rounded-xl border border-white/10 bg-slate-950/70 px-4 py-3 text-sm text-white placeholder:text-slate-500 focus:border-white/40 focus:outline-none"
+              className="mt-2 w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:border-slate-500 focus:outline-none"
               type="email"
               name="email"
               autoComplete="email"
@@ -66,10 +64,10 @@ export default function AdminLoginPage() {
             />
           </label>
 
-          <label className="block text-sm text-slate-200">
+          <label className="block text-sm text-slate-700">
             Password
             <input
-              className="mt-2 w-full rounded-xl border border-white/10 bg-slate-950/70 px-4 py-3 text-sm text-white placeholder:text-slate-500 focus:border-white/40 focus:outline-none"
+              className="mt-2 w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:border-slate-500 focus:outline-none"
               type="password"
               name="password"
               autoComplete="current-password"
@@ -80,13 +78,13 @@ export default function AdminLoginPage() {
           </label>
 
           {error ? (
-            <p className="rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-200">
+            <p className="rounded-xl border border-red-300 bg-red-50 px-4 py-3 text-sm text-red-700">
               {error}
             </p>
           ) : null}
 
           <button
-            className="w-full rounded-xl bg-white px-4 py-3 text-sm font-semibold text-slate-900 transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60"
+            className="w-full rounded-xl bg-slate-900 px-4 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60"
             type="submit"
             disabled={isSubmitting}
           >
